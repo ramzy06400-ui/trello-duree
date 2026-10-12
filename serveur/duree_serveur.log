@@ -1,0 +1,4 @@
+2026-10-13 00:36:53,391 INFO démarrage sur http://127.0.0.1:8765
+2026-10-13 00:36:56,390 INFO 127.0.0.1 "GET /sante HTTP/1.1" 200 -
+2026-10-13 00:37:02,027 INFO https://www.youtube.com/watch?v=jNQXAC9IVRw -> {'type': 'video', 'secondes': 19, 'source': 'yt-dlp:Youtube', 'texte_mots': 28}
+2026-10-13 00:37:02,028 INFO 127.0.0.1 "GET /duree?url=https://www.youtube.com/watch?v=jNQXAC9IVRw HTTP/1.1" 200 -
