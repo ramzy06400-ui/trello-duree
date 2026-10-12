@@ -14,10 +14,18 @@ function boardTotal(t) {
 TrelloPowerUp.initialize({
   'card-badges': function (t) {
     return t.card.apply(t, CARD_FIELDS).then(function (card) {
+      var res = null, enCours = false;
+      function lancer() {
+        if (enCours) return; enCours = true;
+        Duree.get(t, card).then(function (d) { res = d || false; }).catch(function () { res = false; })
+          .then(function () { enCours = false; });
+      }
       return [{ dynamic: function () {
-        return Duree.get(t, card).then(function (d) {
-          return { text: d ? '⏱ ' + Duree.fmt(d.sec) : '⏱ ?', color: d ? (d.manual ? 'blue' : null) : 'light-gray', refresh: 30 };
-        });
+        if (res === null) lancer();
+        var d = res;
+        if (d === null) return { text: '⏱ …', color: 'light-gray', refresh: 10 };
+        if (!d) { res = null; return { text: '⏱ ?', color: 'light-gray', refresh: 60 }; }
+        return { text: '⏱ ' + Duree.fmt(d.sec), color: d.manual ? 'blue' : null, refresh: 120 };
       } }];
     });
   },
